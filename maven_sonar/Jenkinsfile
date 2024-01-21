@@ -15,7 +15,7 @@ pipeline {
     agent any
 
     environment {
-        scannerHome = tool 'sonarqube-scanner'
+        scannerHome = tool 'sonarqube'
     }
 
     stages {
@@ -39,7 +39,7 @@ pipeline {
                 script {
                     withSonarQubeEnv('sonarqube') {
                         // Execute SonarQube Scanner
-                        sh "${scannerHome}/bin/sonar-scanner"
+                        sh "${scannerHome}/bin/sonarqube"
                     }
                 }
             }
