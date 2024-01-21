@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# Set up any environment variables or configurations needed for your Maven build
-export MAVEN_OPTS="-Xmx512m"
+# Your Maven command
+MavenPath="/usr/bin/mvn"
 
-# Run Maven commands
-mvn clean package sonar:sonar
-
-# Add any additional Maven commands or configurations as needed
+# Run Maven
+${MavenPath} clean package sonar:sonar
