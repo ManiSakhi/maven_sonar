@@ -1,19 +1,15 @@
 pipeline {
-    agent none
+    agent any
     stages {
-        stage("build & SonarQube Scanner") {
+        stage("Build & SonarQube Scanner") {
             agent any
             steps {
-                script {
-                    withEnv([
-                        "MAVEN_HOME=usr/bin/mvn",
-                        "JAVA_HOME=usr/bin/java",
-                        "SONARQUBE_TOKEN=6a3a0dbdf44da68279bdebf37c9b29ae5d894764",
-                        // Add more environment variables as needed
-                    ]) {
-                        withSonarQubeEnv('sonarqube') {
-                            sh 'mvn clean package sonar:sonar'
-                        }
+                withEnv([
+                    "PATH+MAVEN=/usr/bin/mvn",
+                    // Other environment variables
+                ]) {
+                    withSonarQubeEnv('sonarqube') {
+                        sh 'mvn clean package sonar:sonar'
                     }
                 }
             }
