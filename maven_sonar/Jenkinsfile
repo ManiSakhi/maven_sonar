@@ -7,8 +7,8 @@ pipeline {
 
             steps {
                 withSonarQubeEnv('sonarqube') {
-              sh './mvnw clean install site surefire-report:report'
-              sh 'tree'
+              sh 'mvn clean package sonar:sonar'
+
                 }
             }
         }
