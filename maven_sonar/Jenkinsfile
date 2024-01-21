@@ -1,49 +1,15 @@
 pipeline {
-    agent any
-
-    environment {
-        scannerHome = tool 'sonarqube-scanner'
-    }
+    agent none
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+        stage("build & SonarQube Scanner") {
+            agent any
 
-        stage('Build') {
             steps {
-                script {
-                    // Replace 'mvn clean install' with your build command
-                    sh 'mvn clean install'
+                withSonarQubeEnv('sonarqube') {
+    
                 }
             }
-        }
-
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    def scannerCmd = "${scannerHome}/bin/sonar-scanner"
-                    def scannerArgs = """
-                        -Dsonar.projectKey=Test
-                        -Dsonar.projectName=Test
-                        -Dsonar.sources=src
-                        -Dsonar.java.binaries=target/classes
-                        -Dsonar.host.url=http://44.211.161.85/
-                        -Dsonar.login=e909964c7bc92c20d6314992f2667e321c851209
-                    """
-
-                    // Execute SonarQube Scanner
-                    sh "${scannerCmd} ${scannerArgs}"
-                }
-            }
-        }
-    }
-
-    post {
-        always {
-            // Cleanup steps, if any
         }
     }
 }
