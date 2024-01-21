@@ -4,8 +4,13 @@ pipeline {
     stages {
         stage('Build & SonarQube Scanner') {
             steps {
-                withSonarQubeEnv('sonarqube') {
-                    sh 'mvn clean package sonar:sonar'
+                script {
+                    def mavenHome = tool 'Maven'
+                    env.PATH = "${mavenHome}/bin:${env.PATH}"
+                    
+                    withSonarQubeEnv('sonarqube') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
                 }
             }
         }
