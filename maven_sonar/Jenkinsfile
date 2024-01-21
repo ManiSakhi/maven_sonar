@@ -1,17 +1,4 @@
 pipeline {
-        agent any
-        stages {
-         
-          stage("build & SonarQube Scanner") {
-            agent any
-            steps {
-              withSonarQubeEnv(installationName:'sonarqube') {
-              }
-            }
-          }
-        }
-      }
-pipeline {
     agent any
 
     environment {
