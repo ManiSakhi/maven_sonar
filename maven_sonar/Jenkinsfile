@@ -1,13 +1,15 @@
 pipeline {
     agent any
 
+    environment {
+        MAVEN_HOME = tool 'maven'
+    }
+
     stages {
-        stage('Build & SonarQube Scanner') {
+        stage('Maven Build') {
             steps {
-                script {                    
-                    withSonarQubeEnv(installationName:'sonarqube') {
-                        sh 'mvn clean package sonar:sonar'
-                    }
+                script {
+                    sh "$MAVEN_HOME/bin/mvn clean package sonar:sonar"
                 }
             }
         }
