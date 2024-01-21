@@ -1,21 +1,14 @@
 pipeline {
-    agent any
-
-    stages {
-        stage('Build & SonarQube Scanner') {
+        agent none
+        stages {
+         
+          stage("build & SonarQube Scanner") {
+            agent any
             steps {
-                script {
-                    // Set up environment variables for Maven
-                    withEnv(["MAVEN_OPTS=-Xmx1024m"]) {
-                        def mavenHome = tool 'Maven'
-                        env.PATH = "${mavenHome}/bin:${env.PATH}"
-
-                        withSonarQubeEnv('SonarQube Scanner') {
-                            sh 'mvn clean package sonar:sonar'
-                        }
-                    }
-                }
+              withSonarQubeEnv('sonarqube') {
+                sh 'mvn clean package sonar:sonar'
+              }
             }
+          }
         }
-    }
-}
+      }
