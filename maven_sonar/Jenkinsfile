@@ -1,18 +1,14 @@
 pipeline {
-    agent any
-    stages {
-        stage("Build & SonarQube Scanner") {
+        agent none
+        stages {
+         
+          stage("build & SonarQube Scanner") {
             agent any
             steps {
-                withEnv([
-                    "PATH+MAVEN=/usr/bin/mvn",
-                    // Other environment variables
-                ]) {
-                    withSonarQubeEnv('sonarqube') {
-                        sh 'mvn clean package sonar:sonar'
-                    }
-                }
+              withSonarQubeEnv('sonarqube') {
+                sh 'mvn clean package sonar:sonar'
+              }
             }
+          }
         }
-    }
-}
+      }
