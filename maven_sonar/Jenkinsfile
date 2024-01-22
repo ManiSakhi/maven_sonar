@@ -1,20 +1,14 @@
 pipeline {
-    agent any
-    stages {
-        stage("Build & SonarQube Scanner") {
+        agent none
+        stages {
+         
+          stage("build & SonarQube Scanner") {
             agent any
             steps {
-                script {
-                    // Checkout the source code to the correct directory
-                    checkout scm
-                    // Run Maven in the correct directory
-                    dir('/usr/bin/mvn') {
-                        withSonarQubeEnv('sonarqube') {
-                            sh 'mvn clean package sonar:sonar'
-                        }
-                    }
-                }
+              withSonarQubeEnv('sonarqube') {
+                sh 'mvn clean package sonar:sonar'
+              }
             }
+          }
         }
-    }
-}
+      }
