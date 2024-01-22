@@ -1,6 +1,0 @@
-{
-  "serverUrl": "http://44.211.161.85/",
-  "token": "6a3a0dbdf44da68279bdebf37c9b29ae5d894764",
-  "projectKey": "Test",
-  "serverVersion": "10.3.0"
-}
