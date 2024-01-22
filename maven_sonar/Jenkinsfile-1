@@ -1,11 +1,16 @@
-node {
-  stage('SCM') {
-    checkout scm
-  }
-  stage('SonarQube Analysis') {
-    def scannerHome = tool 'sonarqube';
-    withSonarQubeEnv() {
-      sh "${scannerHome}/bin/sonar-scanner"
-    }
-  }
-}
+pipeline {
+        agent none
+        environment {
+        JAVA_HOME = '/usr/bin/java'
+        stages {
+         
+          stage("build & SonarQube Scanner") {
+            agent any
+            steps {
+              withSonarQubeEnv('sonarqube') {
+                sh 'mvn clean package sonar:sonar'
+              }
+            }
+          }
+        }
+      }
