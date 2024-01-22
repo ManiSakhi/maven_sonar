@@ -1,0 +1,4 @@
+{
+  "serverUrl": "http://34.227.152.40/",
+  "serverAuthenticationToken": "squ_59a733d0e6694aaf826b0468a1652010d3d17966"
+}
